@@ -106,3 +106,55 @@ let countShuffles n =
 // Problem 6 Tests
 countShuffles 4;;   // Should be 2
 countShuffles 52;;  // Should be 8
+
+// ============================== Luis Averhoff Effort(I did problems 1-3) ==============================
+// Learn more about F# at http://fsharp.org
+// See the 'F# Tutorial' project for more help.
+
+open System
+
+let rec gcd = function
+   | (a, 0) -> a
+   | (a, b) -> gcd (b, a % b)
+
+let (.*) (a, b) (c, d) = 
+    let numerator = a * c
+    let denumerator = b * d
+    let divisor = gcd(numerator, denumerator)
+    (numerator / divisor), (denumerator / divisor)
+
+let (.+) (a, b) (c, d) = 
+    let numerator = a * d + b * c
+    let denominator = b * d
+    let commonF = gcd(numerator, denominator)
+    (numerator / commonF, denominator / commonF)
+
+let revlists list = List.map List.rev list
+
+
+let rec interleave = function
+    | (xs, []) -> xs
+    | ([], ys) -> ys
+    | (x::xs, y::ys) -> x :: y :: interleave(xs, ys)
+
+[<EntryPoint>]
+let main argv =
+    // ------- Problem 1 -------
+    let fraction1 = (1,2) .+ (2,3) .* (3,7);
+    printfn "%d %d" <|| fraction1
+
+    let fraction2 = (1,2) .* (1,3);
+    printfn "%d %d" <|| fraction2
+
+    let fraction3 = (1,2) .+ (1,3);
+    printfn "%d %d" <|| fraction3
+
+    // ------- Problem 2 -------
+    printfn "%A %A" revlists [[0;1;1];[3;2];[];[5]];
+
+    // ------- Problem 3 -------
+    printfn "%A %A" interleave ([1;2;3], [4;5;6]);
+
+    Console.ReadKey() |> ignore
+    0 // return an integer exit code
+// ========================================================================
