@@ -230,7 +230,6 @@ let countShuffles n =
 // Problem 6 Tests
 countShuffles 4;;   // Should be 2
 countShuffles 52;;  // Should be 8
-
 // Problem 6 Write Up
 // ------------------------------------------------------------------------
 // This was the hardest problem of the homework (go-figure it is the last
