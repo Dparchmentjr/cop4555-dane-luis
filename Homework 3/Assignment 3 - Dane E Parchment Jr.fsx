@@ -2,6 +2,59 @@
 
 // Questions by Luis Averhoff
 
+F# Homework 3
+1.) Given vectors u = (u1, u2,..., un) and v = (v1, v2,..., vn), the inner product of u and v is defined to be u1*v1 + u2*v2 + ... + un*vn. Write a curried F# function inner that takes two vectors represented as int lists and returns their inner product:
+
+let rec inner xs ys =
+    match xs, ys with
+    | [], [] -> 0
+    | [], ys -> 0
+    | xs, [] -> 0
+    | x::xs, y::ys -> x * y + inner xs ys;;
+
+   (*
+        The head of the first list (xs) gets multiplied
+        by the head of the second list (ys).
+        We add the next call to this value and recursion
+        takes care of everything.
+        1 * 4 +
+        2 * 4 + 
+        3 * 6 = 32
+    *)
+
+2.) Given an m-by-n matrix A and an n-by-p matrix B, the product of A and B is an m-by-p matrix whose entry in position (i,j) is the inner product of row i of A with column j of B. Write an uncurried F# function to do matrix multiplication.
+
+let rec multiply (xs, ys) =
+    match xs, ys with 
+    | [[]], [[]] -> []
+    | _, [] -> []
+    | [], _ -> []
+    | x::xs, ys -> [List.map (inner x) ((transpose(ys)))] @ multiply (xs, ys);;
+
+   (*
+        We use combine, transpose and inner for this one.
+        We have to perform the inner product of the the
+        first matrix with the transposed version of the
+        second matrix. The problem is that transpose
+        takes in a list (ys) and inner takes in the value
+        of whatever is in the list (x::xs).
+        In order to combine functions that work with 
+        different types we have to use List.map.
+        List.map (inner x) ((transpose(ys))) performs the
+        inner product of the first list with the transposed
+        version of the second list.
+        We append the recursive call at the end with
+        @ multiply (xs, ys) catch all values.
+   *)
+
+3.) Two powerful List functions provided by F# are List.fold and List.foldBack. 
+These are similar to List.reduce and List.reduceBack, but more general. Both take a binary function f, an initial value i, and a 
+list [x1;x2;x3;...;xn]. Each of these functions can be used to implement flatten, which "flattens" a list of lists: Compare the 
+efficiency of flatten1 xs and flatten2 xs, both in terms of asymptotic time compexity and experimentally. 
+To make the analysis simpler, assume that xs is a list of the form [[1];[2];[3];...;[n]].
+
+// The time complexity for flatten1 is O(n^2) and flatten2 is O(n).
+
 // Questions by Dane E. Parchment Jr.
 // Problem #4
 // Analyze the below "twice" function and give a definition of the value of the function when 
