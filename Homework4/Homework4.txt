@@ -1,9 +1,11 @@
 COP 4555 - Homework 4
 
 1.) Recall the unambiguous grammar for arithmetic expressions discussed in class:
+
   E -> E+T | E-T | T
   T -> T*F | T/F | F
   F -> i | (E)
+  
 Modify this grammar to allow an exponentiation operator, ^, so that we can write expressions like i+i^i*i. Of course, your modified grammar should be unambiguous. Give exponentiation higher precedence than the other binary operators and (unlike the other binary operators) make it associate to the right.
 
 Answer:
@@ -14,7 +16,8 @@ Answer:
   F -> i | (E)
 
 Parse Tree Example of i + i ^ i * i
-	                	        E 
+
+	                    E 
                         /   |   \ 
                       /     |    \
                      E      -     T
@@ -32,6 +35,7 @@ Parse Tree Example of i + i ^ i * i
                       i       i
 
 2.) Recall the grammar for the tiny language used in our discussion of recursive-descent parsing. Let us extend the grammar to allow both if-then and if-then-else statements:
+
   S -> if E then S | if E then S else S | begin S L | print E
   L -> end | ; S L
   E -> i
