@@ -1,6 +1,5 @@
 (*
-Luis Averhoff   PID: 5872592
-Dane Parchment  PID: 
+Luis Averhoff and Dane Parchement group.
 *)
 
 // Skeleton file for PCF interpreter
